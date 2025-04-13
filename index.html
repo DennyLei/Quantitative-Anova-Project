@@ -8,19 +8,57 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">Solar System Project</h1>
-        <div class="button-container">
-            <button class="glow-button">Button 1</button>
-            <button class="glow-button">Button 2</button>
-            <button 
-            class="glow-button" 
-            onclick="window.location.href='https://machinegunwilbur.github.io/Quantitative-Anova-Project/planetInfo.html';">
-                Info
-            </button>
-        </div>
+  <div class="off-screen-menu">
+        <ul>
+            <li>Info</li>
+            <li>Sun</li>
+            <li>Mercury</li>
+            <li>Venus</li>
+            <li>Earth</li>
+            <li>Mars</li>
+            <li>Jupiter</li>
+            <li>Saturn</li>
+            <li>Uranus</li>
+            <li>Neptune</li>
+        </ul>
     </div>
-    <canvas id="background"></canvas>
-    <script src="background.js"></script>
+
+    <nav>
+        <div class="ham-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamMenu = document.querySelector('.ham-menu');
+            const offScreenMenu = document.querySelector('.off-screen-menu');
+            const menuItems = document.querySelectorAll('.off-screen-menu li');
+
+            hamMenu.addEventListener('click', () => {
+                hamMenu.classList.toggle('active');
+                offScreenMenu.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', (event) => {
+                const isClickInsideMenu = offScreenMenu.contains(event.target);
+                const isClickOnHamburger = hamMenu.contains(event.target);
+
+                if (!isClickInsideMenu && !isClickOnHamburger) {
+                    hamMenu.classList.remove('active');
+                    offScreenMenu.classList.remove('active');
+                }
+            });
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    hamMenu.classList.remove('active');
+                    offScreenMenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
